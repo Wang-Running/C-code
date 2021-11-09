@@ -219,6 +219,29 @@ int main()
 //	return 0;
 //}
 
+//递归
+//#include <stdio.h>
+//
+//double Pow(n, k)
+//{
+//	if (k == 0)
+//		return 1;
+//	if (k > 0)
+//		return n*Pow(n, k - 1);
+//	else
+//		return 1.0 / n*Pow(n, -k);
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	int k = 0;
+//	scanf("%d %d",&n,&k);
+//	double sum = Pow(n, k);
+//	printf("%lf\n",sum);
+//	return 0;
+//}
+
 //递归和非递归分别实现求第n个斐波那契数
 
 //例如：
