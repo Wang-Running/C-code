@@ -5,12 +5,12 @@
 void Hanno(int n,char fir,char sec,char thi)
 {
 	if (1 == n)
-		printf("%c->%c\n",fir,thi);
+		printf("%c->%c\n",fir,thi);      //一个盘子直接转移
 	else
 	{
-		Hanno(n - 1, fir, thi, sec);
-		printf("%c->%c\n", fir, thi);
-		Hanno(n - 1, sec, fir, thi);
+		Hanno(n - 1, fir, thi, sec);     //一个以上:  最大的留着 上面所有移到第二个
+		printf("%c->%c\n", fir, thi);    //最大的直接转移
+		Hanno(n - 1, sec, fir, thi);      //将第二个上的进行转移
 	}
 		return 0;
 }
