@@ -23,31 +23,54 @@
 
 //写一个函数，可以逆序一个字符串的内容。
 //将一个字符串str的内容颠倒过来，并输出。
-#include <stdio.h>
+//#include <stdio.h>
+//#include <string.h>
+//
+//void Reverse(char* str)
+//{
+//	char* left = str;
+//	char* right = (str + strlen(str) - 1);
+//	while (left < right)
+//	{
+//		char n = *left;
+//		*left = *right;
+//		*right = n;
+//		left++;
+//		right--;
+//	}
+//
+//}
 
-void Reverse(char* str)
-{
-	char* left = str;
-	char* right = (str+(sizeof(str) / sizeof(str[0])-1));
-	while (left < right)
-	{
-		char n = *left;
-		*left = *right;
-		*right = n;
-		left++;
-		right--;
-	}
+//int main()
+//{
+//	int i = 0;
+//	char str[10000] = { 0 };
+//	while (gets(str))
+//	{
+//		Reverse(str);
+//		for (i = 0; i < strlen(str); i++)
+//		{
+//			printf("%c", str[i]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
 
-}
+//int main()
+//{
+//	int i = 0;
+//	char str[10000] = { 0 };
+//	while (gets(str))
+//	{
+//		Reverse(str);
+//		printf("%s\n",str);
+//	}
+//	return 0;
+//}
 
-int main()
-{
-	int i = 0;
-	char str[50] = {0};
-	while (getchar(str))
-	{
-		Reverse(str);
-		printf("%s", str);
-	}
-	return 0;
-}
+
+//求Sn=a+aa+aaa+aaaa+aaaaa的前5项之和，其中a是一个数字，
+
+//例如：2 + 22 + 222 + 2222 + 22222
+
