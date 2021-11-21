@@ -16,7 +16,7 @@
 //模拟实现库函数strlen
 #include <stdio.h>
 //#include <string.h>
-
+#include <assert.h>
 //int main()
 //{
 //	char arr[] =  "abcdef" ;
@@ -24,8 +24,9 @@
 //	return 0;
 //}
 
-int my_strlen(char* s)
+int my_strlen(const char* s)
 {
+	assert(s!=NULL);
 	int i = 0;
 	while (*s!= '\0')
 	{
