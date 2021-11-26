@@ -6,16 +6,16 @@ void Dal(int *arr,int n,int b)
 {
 	int i = 0;
 	int j = 0;
-	for (i = 0; i<n; i++, j++)
+	for (i = 0,j=0; i<n,j<n-1; i++, j++)
 	{
 		if (arr[i] == b)
 		{
 			for (j; j < n; j++, i++)
 			{
 				arr[i] = arr[j + 1];
-				Dal(arr, n, b);
 			}
-			break;
+			i = 0;
+			j = 0;
 		}
 	}
 }
