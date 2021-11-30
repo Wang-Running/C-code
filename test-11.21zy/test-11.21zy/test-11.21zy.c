@@ -78,42 +78,42 @@
 //输入一个整数数组，实现一个函数，
 //来调整该数组中数字的顺序使得数组中所有的奇数位于数组的前半部分，
 //所有偶数位于数组的后半部分。
-//#include <stdio.h>
-//#include <assert.h>
-//
-//void my_array(int* const p,int s)
-//{
-//	assert(p!=NULL);
-//	int*left = p;
-//	int*right = p + s - 1;
-//	while (left < right)
-//	{
-//		while (*left % 2)        //令left遇偶数停
-//		{
-//			left++;
-//		}
-//		while ((*right + 1) % 2)              //令right遇奇数停
-//		{
-//			right--;
-//		}
-//		int temp = 0;
-//		temp = *right;                  //奇偶交换
-//		*right = *left;
-//		*left = temp;
-//		left++;               //左移
-//		right--;               //右移
-//	}
-//}
-//
-//int main()
-//{
-//	int arr[] = {1,5,6,8,4,7,9,11,13};
-//	int i = 0;
-//	int sz = sizeof(arr) / sizeof(arr[0]);
-//	my_array(arr,sz);
-//	for (i = 0; i < sz; i++)
-//	{
-//		printf("%d ", arr[i]);
-//	}
-//	return 0;
-//}
+#include <stdio.h>
+#include <assert.h>
+
+void my_array(int* const p,int s)
+{
+	assert(p!=NULL);
+	int*left = p;
+	int*right = p + s - 1;
+	while (left < right)
+	{
+		while (*left % 2)        //令left遇偶数停
+		{
+			left++;
+		}
+		while ((*right + 1) % 2)              //令right遇奇数停
+		{
+			right--;
+		}
+		int temp = 0;
+		temp = *right;                  //奇偶交换
+		*right = *left;
+		*left = temp;
+		left++;               //左移
+		right--;               //右移
+	}
+}
+
+int main()
+{
+	int arr[] = {1,5,6,8,4,7,9,11,13};
+	int i = 0;
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	my_array(arr,sz);
+	for (i = 0; i < sz; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	return 0;
+}
