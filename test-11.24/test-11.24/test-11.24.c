@@ -192,12 +192,12 @@
 //D选手说：C最后，我第三；
 //E选手说：我第四，A第一；
 //比赛结束后，每位选手都说对了一半，请编程确定比赛的名次。
-//#include <stdio.h>
-//int main()
-//{
-//
-//	return 0;
-//}
+#include <stdio.h>
+int main()
+{
+
+	return 0;
+}
 
 
 //小乐乐喜欢数字，尤其喜欢0和1。他现在得到了一个数，想把每位的数变成0或1。
@@ -228,20 +228,20 @@
 //}
 
 //小乐乐上课需要走n阶台阶，因为他腿比较长，所以每次可以选择走一阶或者走两阶，那么他一共有多少种走法？
-#include <stdio.h>
-
-int step(int n)
-{
-	if (n == 1 || n == 0)
-		return 1;
-	else
-		return step(n-1)+step(n-2);
-}
-
-int main()
-{
-	int n = 0;
-	scanf("%d",&n);
-	printf("%d\n", step(n));
-	return 0;
-}
+//#include <stdio.h>
+//
+//int step(int n)
+//{
+//	if (n == 1 || n == 0)
+//		return 1;
+//	else
+//		return step(n-1)+step(n-2);
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d",&n);
+//	printf("%d\n", step(n));
+//	return 0;
+//}
