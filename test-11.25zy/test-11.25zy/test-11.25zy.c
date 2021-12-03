@@ -1,5 +1,59 @@
 #define _CRT_SECURE_NO_WARNINGS
 
+//BC118
+//老师给了小乐乐一个正整数序列，要求小乐乐把这个序列去重后按从小到大排序。
+//1.运行超时
+#include <stdio.h>
+int main()
+{
+	//输入序列
+	int n = 0;
+	scanf("%d",&n);
+	int i = 0;
+	int arr1[100001] = {0};
+	for (i=0;i<n;i++)
+	{
+		scanf("%d",&arr1[i]);
+	}
+	//查重
+	for (i=0;i<n;i++)
+	{
+		if (arr1[i] == arr1[i + 1])
+		{
+			for (i; i < n; i++)        //最后一位数不被覆盖 防越界
+			{
+				arr1[i] = arr1[i + 1];
+			}
+			i = 0;
+			i--;
+		}
+		if (arr1[i+1]==0)                //防止arr1[i]=arr1[i+1]=0,死循环
+			break;
+	}
+	//排序       冒泡升序
+	for (i = 0;i<n;i++)
+	{
+		int j = 0;
+		for (j = 0; j < n-1; j++)       //防越界互换值
+		{
+			if (arr1[j]>arr1[j + 1])
+			{
+				int temp = 0;
+				temp = arr1[j];
+				arr1[j] = arr1[j + 1];
+				arr1[j+1] = temp;
+			}
+		}
+	}
+	//打印
+	for (i = 0; i < n; i++)
+	{
+		if (arr1[i]!=0)
+		printf("%d ", arr1[i]);
+	}
+	return 0;
+}
+
 //BC114-小乐乐排电梯
 //#include <stdio.h>
 //
