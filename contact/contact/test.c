@@ -4,10 +4,10 @@
 //2.人的信息：性别名字年龄电话住址
 //3.增加联系人
 //4.删除联系人
-//5.查找联系人
-//6.修改联系人
-//7.排序（名字/年龄）
-
+//5.查找联系人(修改)
+//6.名字排序联系人
+//7.展示
+//8.清空
 //菜单打印
 
 
@@ -16,9 +16,9 @@ void menu()
 {
 	printf("***************************\n");
 	printf("***  1.add    2.del     ***\n");
-	printf("***  3.serch  4.modify  ***\n");
-	printf("***  5.sort   6.show    ***\n");
-	printf("***      0.exit         ***\n");
+	printf("***  3.serch  (modify)  ***\n");
+	printf("***  4.sort   5.show    ***\n");
+	printf("***  0.exit   6.clear   ***\n");
 	printf("***************************\n");
 }
 
@@ -48,14 +48,19 @@ int main()
 			scanf("%s", name);
 			FindByname(&con,name);
 			break;
+		//case 4:
+		//	//修改
+		//	Modify(&con);
+		//	break;
 		case 4:
+			Sortname(&con);
 			break;
 		case 5:
-			sortname(&con);
-			break;
-		case 6:
 			//显示
 			ShowContact(&con);
+			break;
+		case 6:
+			Clear(&con);
 			break;
 		case 0:
 			printf("退出通讯录\n");

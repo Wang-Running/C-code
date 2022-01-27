@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <stdlib.h>
 
 #define Max 1000
 #define name_Max 20
@@ -42,4 +43,11 @@ void DeletContact(Contact* pc);
 int FindByname(const Contact*pc, char name[]);
 
 //名字排序
-void sortname(Contact* pc);
+void Sortname(Contact* pc);
+
+
+//修改
+void Modify(Contact* pc, int i);
+
+//清空所有联系人
+void Clear(Contact* pc);

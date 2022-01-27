@@ -48,15 +48,21 @@ void ShowContact(const Contact* pc)
 }
 
 
-int FindByname(const Contact*pc, char name[])
+int FindByname(Contact*pc, char name[])
 {
 	int i = 0;
 	for (i = 0;i<pc->sz;i++)
 	{
 		if (strcmp(pc->data[i].name, name)==0)
 		{
+			int put = 0;
 			printf("%-10s\t%-5d\t%-5s\t%-15s\t%-20s\n", pc->data[i].name, pc->data[i].age, pc->data[i].sex, pc->data[i].addr, pc->data[i].phone);
-			printf("找着了\n");
+			printf("找着了\n请选择是否修改：1.是   0.否\n");
+			scanf("%d",&put);
+			if (1 == put)
+			{
+				Modify(pc->data,i);
+			}
 			return i;
 		}
 	}
@@ -94,14 +100,71 @@ void DeletContact(Contact* pc)
 }
 
 
-//排序
+//name排序
 int cmp_int(const void*e1,const void*e2)
 {
 	return (strcmp(((Peoinfo*)e1)->name, ((Peoinfo*)e2)->name));
 }
 
-void sortname(Contact* pc)
+void Sortname(Contact* pc)
 {
 	qsort(pc->data,pc->sz,sizeof(pc->data[0]),cmp_int);
 	ShowContact(pc);
+}
+
+//修改
+void Modify(Contact* pc,int i)
+{
+	int bud = 0;
+	do
+	{
+		printf("请选择需要修改的内容\n1.名字     2.年龄     3.性别     4.地址     5.电话     0.取消\n请输入：");
+		scanf("%d", &bud);
+		switch (bud)
+		{
+			char chars[30] = { 0 };
+		case 1:
+		{
+				  printf("请输入内容->");
+				  scanf("%s", chars);
+				  strcpy(pc->data[i].name , chars);
+		}
+			break;
+		case 2:
+		{
+				  int num = 0;
+				  printf("请输入内容->");
+				  scanf("%d", &num);
+				  pc->data[i].age = num;
+		}
+			break;
+		case 3:
+		{
+				  printf("请输入内容->");
+				  scanf("%s", chars);
+				  strcpy(pc->data[i].sex , chars);
+		}
+			break;
+		case 4:
+				  printf("请输入内容->");
+				  scanf("%s", chars);
+				  strcpy(pc->data[i].addr , chars);
+			break;
+		case 5:
+		{
+				  printf("请输入内容->");
+				  scanf("%s", chars);
+				  strcpy(pc->data[i].phone , chars);
+		}
+			break;
+		dafault:
+			break;
+		}
+	} while (bud);
+}
+
+//清空所有联系人
+void Clear(Contact* pc)
+{
+	InitContact(pc);
 }
