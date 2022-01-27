@@ -55,9 +55,12 @@ int FindByname(const Contact*pc, char name[])
 	{
 		if (strcmp(pc->data[i].name, name)==0)
 		{
+			printf("%-10s\t%-5d\t%-5s\t%-15s\t%-20s\n", pc->data[i].name, pc->data[i].age, pc->data[i].sex, pc->data[i].addr, pc->data[i].phone);
+			printf("找着了\n");
 			return i;
 		}
 	}
+	printf("没找到\n");
 	return -1;
 }
 
@@ -88,4 +91,17 @@ void DeletContact(Contact* pc)
 		pc->sz--;
 		printf("删除成功\n");
 	}
+}
+
+
+//排序
+int cmp_int(const void*e1,const void*e2)
+{
+	return (strcmp(((Peoinfo*)e1)->name, ((Peoinfo*)e2)->name));
+}
+
+void sortname(Contact* pc)
+{
+	qsort(pc->data,pc->sz,sizeof(pc->data[0]),cmp_int);
+	ShowContact(pc);
 }

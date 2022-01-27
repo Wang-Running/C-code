@@ -18,7 +18,7 @@ void menu()
 	printf("***  1.add    2.del     ***\n");
 	printf("***  3.serch  4.modify  ***\n");
 	printf("***  5.sort   6.show    ***\n");
-	printf("***  0.exit             ***\n");
+	printf("***      0.exit         ***\n");
 	printf("***************************\n");
 }
 
@@ -29,6 +29,7 @@ int main()
 	InitContact(&con);//初始化通讯录
 	do
 	{
+		char name[name_Max];
 		menu();
 		printf("请选择->");
 		scanf("%d",&input);
@@ -43,10 +44,14 @@ int main()
 			DeletContact(&con);
 			break;
 		case 3:
+			printf("请输入要查找人的名字：");
+			scanf("%s", name);
+			FindByname(&con,name);
 			break;
 		case 4:
 			break;
 		case 5:
+			sortname(&con);
 			break;
 		case 6:
 			//显示

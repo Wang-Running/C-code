@@ -37,3 +37,9 @@ void ShowContact(const Contact* pc);
 
 //É¾³ı
 void DeletContact(Contact* pc);
+
+//²éÕÒ
+int FindByname(const Contact*pc, char name[]);
+
+//Ãû×ÖÅÅĞò
+void sortname(Contact* pc);
