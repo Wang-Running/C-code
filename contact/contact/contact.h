@@ -50,4 +50,4 @@ void Sortname(Contact* pc);
 void Modify(Contact* pc, int i);
 
 //清空所有联系人
-void Clear(Contact* pc);
+void ClearContact(Contact* pc);

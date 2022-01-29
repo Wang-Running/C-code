@@ -12,6 +12,18 @@
 
 
 #include "contact.h"
+
+enum Oprion
+{
+	Exit,
+	Add,
+	Del,
+	Serch,
+	Sort,
+	Show,
+	Clear
+};
+
 void menu()
 {
 	printf("***************************\n");
@@ -35,15 +47,15 @@ int main()
 		scanf("%d",&input);
 		switch (input)
 		{
-		case 1:
+		case Add:
 			//增加信息
 			AddContact(&con);
 			break;
-		case 2:
+		case Del:
 			//删除
 			DeletContact(&con);
 			break;
-		case 3:
+		case Serch:
 			printf("请输入要查找人的名字：");
 			scanf("%s", name);
 			FindByname(&con,name);
@@ -52,17 +64,17 @@ int main()
 		//	//修改
 		//	Modify(&con);
 		//	break;
-		case 4:
+		case Sort:
 			Sortname(&con);
 			break;
-		case 5:
+		case Show:
 			//显示
 			ShowContact(&con);
 			break;
-		case 6:
-			Clear(&con);
+		case Clear:
+			ClearContact(&con);
 			break;
-		case 0:
+		case Exit:
 			printf("退出通讯录\n");
 			break;
 		dafault:
