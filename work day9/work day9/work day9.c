@@ -1,24 +1,64 @@
-#define _CRT_SECURE_NO_WARNINGS
-//leetcode ÌâºÅ£º728. ×Ô³ıÊı
-//±éÀúÊı×éÖĞµÄÃ¿¸öÔªËØ£¬ÅĞ¶ÏÊÇ·ñÊÇ×Ô³ıÊı¼´¿É£¬Èç¹ûÊÇÔò¼ÓÈëµ½·µ»ØÊı×éÖĞ
-int* selfDividingNumbers(int left, int right, int* returnSize){
-	int *ret = (int *)calloc(1000, sizeof(int));//¶¯Ì¬ÉêÇë×ã¹»´óµÄ¿Õ¼äÓÃÓÚ´æ·Å·µ»ØµÄ×Ô³ıÊı
-	*returnSize = 0;
-	for (int i = left; i <= right; i++) 
+ï»¿#define _CRT_SECURE_NO_WARNINGS
+//leetcode é¢˜å·ï¼š728. è‡ªé™¤æ•°
+//éå†æ•°ç»„ä¸­çš„æ¯ä¸ªå…ƒç´ ï¼Œåˆ¤æ–­æ˜¯å¦æ˜¯è‡ªé™¤æ•°å³å¯ï¼Œå¦‚æœæ˜¯åˆ™åŠ å…¥åˆ°è¿”å›æ•°ç»„ä¸­
+//int* selfDividingNumbers(int left, int right, int* returnSize)
+//{
+//	int *ret = (int *)calloc(1000, sizeof(int));//åŠ¨æ€ç”³è¯·è¶³å¤Ÿå¤§çš„ç©ºé—´ç”¨äºå­˜æ”¾è¿”å›çš„è‡ªé™¤æ•°
+//	*returnSize = 0;
+//	for (int i = left; i <= right; i++) 
+//	{
+//		int num = i;
+//		while (num) 
+//		{
+//			int remainder = num % 10;//è®¡ç®—ä½™æ•°
+//			if (remainder == 0 || (i % remainder) != 0) 
+//			{//åˆ¤æ–­iè‡ªèº«ä¸ä½™æ•°å–æ¨¡æ˜¯å¦ä¸º0
+//				break;
+//			}
+//			num /= 10;
+//		}
+//		//å¦‚æœnum==0è¡¨ç¤ºé€šè¿‡äº†æ¯ä¸€ä½æ•°çš„å–æ¨¡åˆ¤æ–­ï¼Œåˆ™iå°±æ˜¯è‡ªé™¤æ•°
+//		if (num == 0) 
+//			ret[(*returnSize)++] = i;
+//	}
+//	return ret;
+//}
+
+
+//day 10
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	int a = 1, b = 2, m = 0, n = 0, k;
+//	k = (n = b<a) && (m = a);
+//	printf("%d,%d\n", k, m);
+//	return 0;
+//}
+//(n=b<a)&&(m=a)è½¬æ¢æˆ(0)&&(m=a)ï¼Œ&&è¿ç®—å‰è¡¨è¾¾å¼ä¸º
+//å‡ï¼Œåˆ™åé¢çš„æ‹¬å·(m = a)ä¸è¿ç®—ï¼Œmå€¼è¿˜æ˜¯0
+
+//ç‰›å®¢ç½‘é¢˜å·ï¼š JZ65 ä¸ç”¨åŠ å‡ä¹˜é™¤åšåŠ æ³•
+//å†™ä¸€ä¸ªå‡½æ•°ï¼Œæ±‚ä¸¤ä¸ªæ•´æ•°ä¹‹å’Œï¼Œè¦æ±‚åœ¨å‡½æ•°ä½“å†…ä¸å¾—ä½¿ç”¨ + ã€ - ã€*ã€ / å››åˆ™è¿ç®—ç¬¦å·ã€‚
+//æ•°æ®èŒƒå›´ï¼šä¸¤ä¸ªæ•°éƒ½æ»¡è¶³ - 10 \le n \le 1000âˆ’10â‰¤nâ‰¤1000
+//è¿›é˜¶ï¼šç©ºé—´å¤æ‚åº¦ O(1)O(1)ï¼Œæ—¶é—´å¤æ‚åº¦ O(1)O(1)
+#include <stdio.h>
+int Add(int num1, int num2)
+{
+	while (num2 != 0)
 	{
-		int num = i;
-		while (num) 
-		{
-			int remainder = num % 10;//¼ÆËãÓàÊı
-			if (remainder == 0 || (i % remainder) != 0) 
-			{//ÅĞ¶Ïi×ÔÉíÓëÓàÊıÈ¡Ä£ÊÇ·ñÎª0
-				break;
-			}
-			num /= 10;
-		}
-		//Èç¹ûnum==0±íÊ¾Í¨¹ıÁËÃ¿Ò»Î»ÊıµÄÈ¡Ä£ÅĞ¶Ï£¬Ôòi¾ÍÊÇ×Ô³ıÊı
-		if (num == 0) 
-			ret[(*returnSize)++] = i;
+		int a = (num1&num2) << 1;
+		num1 = num1^num2;
+		num2 = a;
 	}
-	return ret;
-}
+	return num1;
+}
+int main()
+{
+	int num1, num2;
+	scanf("%d %d",&num1,&num2);
+	int sum=Add(num1,num2);
+	printf("%d\n",sum);
+	return 0;
+}
