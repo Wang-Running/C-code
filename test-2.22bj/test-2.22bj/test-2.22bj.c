@@ -235,24 +235,121 @@
 
 //二进制读
 
-struct Book
-{
-	char name[12];
-	int price;
-	double word;
-};
+//struct Book
+//{
+//	char name[12];
+//	int price;
+//	double word;
+//};
+//
+//int main()
+//{
+//	struct Book b[2] = { 0 };
+//	FILE* pf = fopen("data.txt", "rb");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//	}
+//	//按照二进制写入文件
+//	fread(&b, sizeof(struct Book), 1, pf);
+//	printf("%s %d %lf",b[0].name,b[0].price,b[0].word);
+//
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
 
+//sprintf--sscanf
+//struct Book
+//{
+//	char name[12];
+//	int price;
+//	double word;
+//};
+//
+//int main()
+//{
+//	struct Book b = { "程序设计", 30, 87.5 };
+//	struct Book b2 = { 0 };
+//	//写入文件
+//	char buf[100] = { 0 };
+//	sprintf(buf,"%s %d %lf", b.name, b.price, b.word);
+//	printf("%s\n",buf);
+//	sscanf(buf, "%s %d %lf", b2.name,&( b2.price),&( b2.word));
+//	printf("%s %d %lf\n", b2.name, b2.price, b2.word);
+//	return 0;
+//}
+
+////fseek
+////int fseek ( FILE * stream, long int offset, int origin );
+//int main()
+//{
+//	FILE* pf=fopen("test.txt","r");//提前创建文本abcdef
+//	if (pf==NULL)
+//	{
+//		printf("%s\n",strerror(errno));
+//		return 0;
+//	}
+//	//读文件
+//	int ch = fgetc(pf);
+//	printf("%c\n", ch); //打印a后向后一位，此时指针指向b
+//	//定位文件指针
+//	fseek(pf, 2, SEEK_CUR);//SEEK_CUR当前位置，向后两位
+//	ch = fgetc(pf);
+//	printf("%c\n", ch);  //此时应是d
+//
+//	fseek(pf, -1, SEEK_END);//SEEK_END文件末尾，向前一位
+//	ch = fgetc(pf);
+//	printf("%c\n", ch);  //此时应是f
+//
+//	fseek(pf, 2, SEEK_SET);//SEEK_SET文件起始，位置向后两位
+//	ch = fgetc(pf);
+//	printf("%c\n", ch);  //此时应是c
+//
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+//ftell
+//
+//int main()
+//{
+//	FILE* pf = fopen("test.txt", "r");//提前创建文本abcdef
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 0;
+//	}
+//	//读文件
+//	int ch = fgetc(pf);
+//	printf("%c\n", ch); //打印a后向后一位，此时指针指向b
+//	int ret = ftell(pf);  //返回的是指针从起始位置开始的偏移量
+//	printf("%d\n",ret);
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+//rewind
 int main()
 {
-	struct Book b[2] = { 0 };
-	FILE* pf = fopen("data.txt", "rb");
+	FILE* pf = fopen("test.txt", "r");//提前创建文本abcdef
 	if (pf == NULL)
 	{
 		printf("%s\n", strerror(errno));
+		return 0;
 	}
-	//按照二进制写入文件
-	fread(&b, sizeof(struct Book), 1, pf);
-	printf("%s %d %lf",b[0].name,b[0].price,b[0].word);
+	//读文件
+	int ch = fgetc(pf);
+	printf("%c\n", ch); //打印a后向后一位，此时指针指向b
+	ch = fgetc(pf);
+	printf("%c\n", ch); //打印b后向后一位，此时指针指向c
+	int ret = ftell(pf);  //返回的是指针从起始位置开始的偏移量
+	printf("%d\n", ret);  //2
+	rewind(pf); //返回起始位置，指向a
+	ch = fgetc(pf);
+	printf("%c\n", ch); //打印a
 
 	fclose(pf);
 	pf = NULL;
