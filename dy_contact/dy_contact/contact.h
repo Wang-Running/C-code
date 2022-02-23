@@ -60,3 +60,9 @@ void Modify(Contact* pc, int i);
 
 //清空所有联系人
 void ClearContact(Contact* pc);
+
+//保存信息到文件
+void SaveContact(Contact* pc);
+
+//加载信息
+void LoadContact(Contact* pc);

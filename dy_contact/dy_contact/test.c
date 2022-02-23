@@ -76,6 +76,8 @@ int main()
 			ClearContact(&con);
 			break;
 		case Exit:
+			//保存信息
+			SaveContact(&con);
 			DestoryContact(&con);
 			printf("退出通讯录\n");
 			break;
