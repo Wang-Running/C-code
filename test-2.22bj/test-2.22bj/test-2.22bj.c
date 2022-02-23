@@ -207,3 +207,54 @@
 //	pf = NULL;
 //	return 0;
 //}
+
+//二进制写
+
+//struct Book
+//{
+//	char name[12];
+//	int price;
+//	double word;
+//};
+//
+//int main()
+//{
+//	struct Book b[2] = { { "程序设计", 30, 87.5 },{"理解c",15,50.5} };
+//	FILE* pf = fopen("data.txt", "wb");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//	}
+//	//按照二进制写入文件
+//	fwrite(&b,sizeof(struct Book),1,pf);
+//
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+//二进制读
+
+struct Book
+{
+	char name[12];
+	int price;
+	double word;
+};
+
+int main()
+{
+	struct Book b[2] = { 0 };
+	FILE* pf = fopen("data.txt", "rb");
+	if (pf == NULL)
+	{
+		printf("%s\n", strerror(errno));
+	}
+	//按照二进制写入文件
+	fread(&b, sizeof(struct Book), 1, pf);
+	printf("%s %d %lf",b[0].name,b[0].price,b[0].word);
+
+	fclose(pf);
+	pf = NULL;
+	return 0;
+}
