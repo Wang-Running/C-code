@@ -70,29 +70,29 @@
 //}
 
 //模拟实现strncpy
-#include <stdio.h>
-#include <assert.h>
-char* my_strncpy(char* dest, const char* src,int n)
-{
-	char* ret = dest;
-	//保留起始地址
-	assert(dest && src);
-	for (int i = 0;i<n;i++)
-	{
-		*dest++ = *src++;
-	}
-}
-
-int main()
-{
-	char arr1[] = { 'a', 'b', 'c', 'd', 'e', 'f', '\0' };
-	char arr2[20] = "xxxxxxxxxxxx";
-	int n = 0;
-	scanf("%d",&n);
-	my_strncpy(arr2, arr1,n);
-	printf("%s\n", arr2);
-	return 0;
-}
+//#include <stdio.h>
+//#include <assert.h>
+//char* my_strncpy(char* dest, const char* src,int n)
+//{
+//	char* ret = dest;
+//	//保留起始地址
+//	assert(dest && src);
+//	for (int i = 0;i<n;i++)
+//	{
+//		*dest++ = *src++;
+//	}
+//}
+//
+//int main()
+//{
+//	char arr1[] = { 'a', 'b', 'c', 'd', 'e', 'f', '\0' };
+//	char arr2[20] = "xxxxxxxxxxxx";
+//	int n = 0;
+//	scanf("%d",&n);
+//	my_strncpy(arr2, arr1,n);
+//	printf("%s\n", arr2);
+//	return 0;
+//}
 
 //模拟strcpy
 //#include <stdio.h>
@@ -117,6 +117,90 @@ int main()
 //	printf("%s\n", arr2);
 //	return 0;
 //}
+
+//模拟实现atoi-字符串转整型
+#include <stdio.h>
+#include <assert.h>
+#include <ctype.h>
+//int main()
+//{
+//	int ret = atoi("123");
+//	printf("%d\n",ret);
+//	return 0;
+//}
+
+//空指针
+//空字符串
+//空白字符
+//+-数
+//非数字字符
+//超大数字
+
+enum State
+{
+	INVALID,//非法
+	VALID  //合法
+};
+enum State staue= INVALID;
+int my_atoi(const char* str)
+{
+	assert(str);
+	//空字符串
+	if (*str == '\0')
+		return 0;
+
+	//空白字符
+	while (isspace(*str))
+	{
+		str++;
+	}
+
+	int flag = 1;
+	//+-数
+	if (*str=='+')
+	{
+		str++;
+		flag = 1;
+	}
+	else if (*str == '-')
+	{
+		str++;
+		flag = -1;
+	}
+
+	long long n = 0;
+	while (isdigit(*str))
+	{
+		n =n * 10 + flag * (*str - '0');
+		if ((n > INT_MAX) || (n < INT_MIN))
+		{
+			return 0;
+		}
+		str++;
+	}
+
+	//while (isdigit(*str))
+	//{
+	//	n = n * 10 + flag*(*str - '0');//消除负号的影响
+
+	//	str++;
+	//}
+	if (*str=='\0')
+	{
+		staue = VALID;
+		return (int)n;
+	}
+	return n;
+}
+int main()
+{
+	int ret = my_atoi("-100");
+	if (staue == VALID)
+		printf("%d\n", ret);
+	else
+		printf("非法返回\n");
+	return 0;
+}
 
 //找单身狗
 //一个数组中只有两个数字是出现一次，其他所有数字都出现了两次。
