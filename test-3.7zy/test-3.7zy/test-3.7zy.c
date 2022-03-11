@@ -7,8 +7,8 @@
 //结果：超出时间限制，leetcode过不了
 //#include <stdio.h>
 //void rotate(int* nums, int numsSize, int k){
-//	int ret = k%numsSize;
-//	for (int i = 0; i<ret; i++)
+//	k = k%numsSize;
+//	for (int i = 0; i<k; i++)
 //	{
 //		int num = nums[numsSize - 1];
 //		for (int j = numsSize - 1; j>0; j--)
