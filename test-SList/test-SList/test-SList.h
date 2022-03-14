@@ -19,3 +19,12 @@ void SListPushBack(SListNode** phead, SLDataType x);
 
 //单链表头插
 void SListPushFront(SListNode** phead, SLDataType x);
+
+//单链表尾删
+void SListPopBack(SListNode** phead, SLDataType x);
+
+//单链表头删
+void SListPopFront(SListNode** phead, SLDataType x);
+
+//查找
+void SListFind(SListNode* phead, SLDataType x);
