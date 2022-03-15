@@ -61,6 +61,10 @@ int main()
 			SLPrintf(&s);
 			break;
 		case 0:
+			SLDestory(&s);
+			break;
+		default:
+			printf("ÇëÖØĞÂÊäÈë\n");
 			break;
 		}
 	} while (input);
