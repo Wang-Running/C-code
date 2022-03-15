@@ -18,6 +18,14 @@ void TestSList1()
 	slist = n1;
 
 	SListPrint(slist);
+	SListNode* pos = SListFind(slist, 3);
+	if (pos)
+	{
+		SListInsert(&slist,pos,30);
+	}
+	SListPrint(slist);
+	SListErase(&slist,pos);
+	SListPrint(slist);
 }
 
 void TestSList2()
@@ -28,10 +36,18 @@ void TestSList2()
 		SListPushBack(&slist, i);
 	}
 	SListPrint(slist);
+	SListNode* pos = SListFind(slist,3);
+	if (pos)
+	{
+		printf("ÕÒµ½ÁË:%p\n",pos);
+		//ĞŞ¸Ä
+		pos->data *= 10;
+	}
+	SListPrint(slist);
 }
 int main()
 {
-//	TestSList1();
-	TestSList2();
+	TestSList1();
+//	TestSList2();
 	return 0;
 }

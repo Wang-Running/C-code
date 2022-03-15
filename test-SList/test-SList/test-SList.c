@@ -118,7 +118,9 @@ void SListPopFront(SListNode** phead)
 	{
 		return;
 	}
-	SListNode* next = *phead;
+
+	//1.
+	SListNode* next = (*phead)->next;
 	free(*phead);
 	*phead = next;
 
@@ -131,14 +133,104 @@ void SListPopFront(SListNode** phead)
 
 
 //查找
-void SListFind(SListNode* phead, SLDataType x)
+SListNode* SListFind(SListNode* phead, SLDataType x)
 {
 	SListNode* cur = phead;
 	while (cur!=NULL)
 	{
 		if (cur->data==x)
 		{
-			
+			return cur;
 		}
+		
+		cur = cur->next;
 	}
+	return NULL;
+}
+
+//单链表任意位置插入
+void SListInsert(SListNode** phead, SListNode* pos, SLDataType x)
+{
+	assert(phead);
+	assert(pos);
+
+	//1.pos是第一个节点
+	//2.pos不是第一个节点
+	if (pos == *phead)
+	{
+		SListPushFront(phead,x);
+	}
+	else
+	{
+		SListNode* prev = *phead;
+		while (prev->next != pos)
+		{
+			prev = prev->next;
+		}
+		SListNode* newnode = BuySListNode(x);
+		newnode->next = pos;
+		prev->next = newnode;
+	}
+}
+
+
+//单链表pos位置后插入
+void SListInsertAfter(SListNode* pos, SLDataType x)
+{
+	assert(pos);
+	SListNode* next = pos->next;
+	SListNode* newnode = BuySListNode(x);
+	pos->next = newnode;
+	newnode->next = next;
+}
+
+//单链表任意位置删除
+void SListErase(SListNode** phead, SListNode* pos)
+{
+	assert(phead);
+	assert(pos);
+	if (pos == *phead)
+	{
+		SListPopFront(phead);
+	}
+	else
+	{
+		SListNode* prev = *phead;
+		while (prev->next != pos)
+		{
+			prev = prev->next;
+		}
+		prev->next = pos->next;
+		free(pos);
+		pos = NULL;
+	}
+
+}
+
+//单链表pos位置后删除
+void SListEraseAfter(SListNode* pos)
+{
+	assert(pos);
+	SListNode* next = pos->next;
+	if (next)
+	{
+		pos->next = next->next;
+		free(next);
+		next = NULL;
+	}
+
+}
+
+//销毁
+void SListDestory(SListNode** phead)
+{
+	assert(phead);
+	SListNode* cur = *phead;
+	while (cur)
+	{
+		SListNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
+	*phead = NULL;
 }
