@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <assert.h>
+#include <stdlib.h>
 
 typedef int SLDataType;
 
@@ -44,3 +45,5 @@ void SListEraseAfter(SListNode* pos);
 
 //Ïú»Ù
 void SListDestory(SListNode** phead);
+
+struct SListNode* middleNode(SListNode* head);
