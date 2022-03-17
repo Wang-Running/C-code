@@ -121,6 +121,20 @@
 //	return head;
 //}
 
+//新链表，头插
+struct ListNode* reverseList(struct ListNode* head){
+	struct ListNode* newlist = NULL;
+	struct ListNode* cur = head;
+	while (cur)
+	{
+		struct ListNode* next = cur->next;
+		cur->next = newlist;
+		newlist = cur;
+		cur = next;
+	}
+	return newlist;
+}
+
 //力扣 876. 链表的中间结点
 
 //1.遍历
