@@ -65,29 +65,29 @@ void TestSList3()
 	n4->next = n5;
 	n5->next = NULL;
 	slist = n1;
-    middleNode(slist);
+    //middleNode(slist);
 	SListPrint(slist);
 
 }
 
-struct SListNode* middleNode(struct SListNode* head){
-	struct SListNode* cur = head;
-	int count = 0;
-	while (cur)
-	{
-		count++;
-		cur = cur->next;
-	}
-	if (cur && (cur->next))
-	{
-		for (int i = 0; i<(count / 2 - 1); i++)
-		{
-			struct SListNode* next = cur->next;
-			cur = next;
-		}
-	}
-	return cur;
-}
+//struct SListNode* middleNode(struct SListNode* head){
+//	struct SListNode* cur = head;
+//	int count = 0;
+//	while (cur)
+//	{
+//		count++;
+//		cur = cur->next;
+//	}
+//	if (cur && (cur->next))
+//	{
+//		for (int i = 0; i<(count / 2 - 1); i++)
+//		{
+//			struct SListNode* next = cur->next;
+//			cur = next;
+//		}
+//	}
+//	return cur;
+//}
 
 int main()
 {
