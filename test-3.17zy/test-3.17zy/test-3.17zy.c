@@ -151,6 +151,7 @@ ListNode(int x) : val(x), next(NULL) {}
 //		free(n1);
 //		free(n2);
 //		return newlist;
+//    }
 //	};
 
 //不带头结点
@@ -163,14 +164,13 @@ ListNode(int x) : val(x), next(NULL) {}
 //class Partition {
 //public:
 //	ListNode* partition(ListNode* pHead, int x) {
-//		// write code here
 //		if (pHead == NULL)
 //			return NULL;
-//		ListNode* n1 = NULL;
-//		ListNode* n2 = NULL;
-//		ListNode* cur = pHead;
-//		ListNode* tail1 = NULL;
-//		ListNode* tail2 = NULL;
+//		struct ListNode* n1 = NULL;
+//		struct ListNode* n2 = NULL;
+//		struct ListNode* cur = pHead;
+//		struct ListNode* tail1 = NULL;
+//		struct ListNode* tail2 = NULL;
 //		while (cur)
 //		{
 //			if (cur->val<x)
@@ -199,8 +199,71 @@ ListNode(int x) : val(x), next(NULL) {}
 //			}
 //			cur = cur->next;
 //		}
-//		tail1->next = n2;
-//		n2->next = NULL;
-//		return n1;
+//		if (n1)
+//		{
+//			tail1->next = n2;
+//			if (n2)
+//			{
+//				tail2->next = NULL;
+//			}
+//			return n1;
+//		}
+//		else
+//		{
+//			return n2;
+//		}
+//		return NULL;
+//	}
+//};
+
+
+
+
+//OR36 链表的回文结构
+
+/*
+struct ListNode {
+int val;
+struct ListNode *next;
+ListNode(int x) : val(x), next(NULL) {}
+};*/
+//class PalindromeList {
+//public:
+//	bool chkPalindrome(ListNode* A) {
+//		// write code here
+//		//找中间结点
+//		struct ListNode* fast, *slow;
+//		fast = slow = A;
+//		while (fast&&fast->next)
+//		{
+//			fast = fast->next->next;
+//			slow = slow->next;
+//		}
+//		struct ListNode* mid = slow;
+//		//从中间结点开始，后半部分链表逆置
+//		struct ListNode* cur, *prev;
+//		cur = slow; prev = NULL;
+//		while (cur)
+//		{
+//			struct ListNode* next = cur->next;
+//			cur->next = prev;
+//			prev = cur;
+//			cur = next;
+//		}
+//		//prev为逆置后链表开头
+//		//比较
+//		while (prev)
+//		{
+//			if (prev->val == A->val)
+//			{
+//				prev = prev->next;
+//				A = A->next;
+//			}
+//			else
+//			{
+//				return false;
+//			}
+//		}
+//		return true;
 //	}
 //};
