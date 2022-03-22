@@ -159,3 +159,65 @@
 //	}
 //	return NULL;
 //}
+
+
+
+//力扣 138. 复制带随机指针的链表
+/**
+* Definition for a Node.
+* struct Node {
+*     int val;
+*     struct Node *next;
+*     struct Node *random;
+* };
+*/
+
+struct Node* copyRandomList(struct Node* head) {
+	//在每个结点后面复制一个结点
+	struct Node* cur = head;
+	while (cur)
+	{
+		struct Node* copy = (struct Node*)malloc(sizeof(struct Node));
+		copy->val = cur->val;
+		copy->next = cur->next;
+		cur->next = copy;
+		cur = cur->next->next;
+	}
+	//复制结点的random更新
+	struct Node* cur1 = head;
+	while (cur1)
+	{
+		struct Node* copynode = cur1->next;
+		if (cur1->random == NULL)
+		{
+			copynode->random = NULL;
+		}
+		else
+		{
+			copynode->random = cur1->random->next;
+		}
+		cur1 = cur1->next->next;
+	}
+	//将复制节点连接起来,原链表恢复
+	//注意是尾插
+	struct Node* cur2 = head;
+	struct Node* tail = NULL;
+	struct Node* newnode = NULL;
+	while (cur2)
+	{
+		struct Node* next1 = cur2->next;
+		struct Node* next2 = next1->next;
+		cur2->next = next2;
+		if (tail == NULL)
+		{
+			newnode = tail = next1;
+		}
+		else
+		{
+			tail->next = next1;
+			tail = next1;
+		}
+		cur2 = next2;
+	}
+	return newnode;
+}
