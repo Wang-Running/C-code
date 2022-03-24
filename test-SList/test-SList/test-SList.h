@@ -13,6 +13,11 @@ typedef struct SListNode
 	struct SListNode* next;
 }SListNode;
 
+struct ListNode
+{
+	int val;
+	struct ListNode *next;
+};
 //¥Ú”°µ•¡¥±Ì
 void SListPrint(SListNode* phead);
 
