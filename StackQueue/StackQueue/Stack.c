@@ -71,5 +71,6 @@ int StackSize(ST* ps)
 Datatype StackTop(ST* ps)
 {
 	assert(ps);
+	assert(ps->top>0);
 	return ps->a[ps->top-1];
 }
