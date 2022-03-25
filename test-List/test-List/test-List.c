@@ -71,8 +71,7 @@ void ListPopBack(ListNode* phead)
 	tail->prev->next = phead;
 	phead->prev = tail->prev;
 	free(tail);
-	tail->next = NULL;
-	tail->prev = NULL;
+	tail = NULL;
 }
 
 
@@ -127,4 +126,18 @@ void ListErase(ListNode* pos)
 	pos->next->prev = pos->prev;
 	free(pos);
 	pos = NULL;
+}
+
+//Ïú»Ù
+void ListDestroy(ListNode* phead)
+{
+	ListNode* cur = phead->next;
+	while (cur != phead)
+	{
+		ListNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
+
+	free(phead);
 }

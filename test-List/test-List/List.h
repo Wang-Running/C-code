@@ -43,3 +43,6 @@ void ListInsert(ListNode* pos,Datatype x);
 
 //posÎ»ÖÃÉ¾³ı
 void ListErase(ListNode* pos);
+
+//Ïú»Ù
+void ListDestroy(ListNode* phead);
