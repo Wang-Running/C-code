@@ -51,7 +51,7 @@ void QueuePop(Queue* pq)
 	if (pq->head->next==NULL)
 	{
 		free(pq->head);
-		pq->head = pq->tail = NULL;+
+		pq->head = pq->tail = NULL;
 	}
 	else
 	{
