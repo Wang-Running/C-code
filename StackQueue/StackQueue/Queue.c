@@ -22,7 +22,7 @@ void QueueDestory(Queue* pq)
 	pq->head = pq->tail = NULL;
 }
 
-//队尾插入
+//入队
 void QueuePush(Queue* pq, QDatatype x)
 {
 	assert(pq);
@@ -42,7 +42,7 @@ void QueuePush(Queue* pq, QDatatype x)
 	}
 }
 
-//队头删除
+//出队
 void QueuePop(Queue* pq)
 {
 	assert(pq);
