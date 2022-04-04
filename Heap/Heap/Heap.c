@@ -48,7 +48,7 @@ void HeapPush(HP* php, HPDataType x)
 {
 	assert(php);
 	//²åÈëÔªËØ
-	if (php->a==php->capacity)
+	if (php->size==php->capacity)
 	{
 		size_t newcapacity = php->capacity == 0 ? 4 : 2 * php->capacity;
 		HPDataType* tmp = (HPDataType*)realloc(php->a,sizeof(HPDataType)*newcapacity);
