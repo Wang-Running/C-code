@@ -91,31 +91,54 @@ void HeapPrint(HP* php)
 	printf("\n");
 }
 
-void Down(HPDataType* a,size_t parent,size_t size)
+//void Down(HPDataType* a,size_t parent,size_t size)
+//{
+//	size_t lchild = parent*2 + 1;
+//	size_t rchild = parent*2 + 2;
+//	while (rchild<size)
+//	{
+//		if (a[lchild]<a[rchild])
+//		{
+//			if (a[parent] > a[lchild])
+//			{
+//				swap(&a[parent], &a[lchild]);
+//				parent = lchild;
+//				lchild = parent*2 + 1;
+//				rchild = parent*2 + 2;
+//			}
+//		}
+//		else if (a[lchild]>a[rchild])
+//		{
+//			if (a[parent] > a[rchild])
+//			{
+//				swap(&a[parent], &a[rchild]);
+//				parent = rchild;
+//				lchild = parent*2 + 1;
+//				rchild = parent*2+ 2;
+//			}
+//		}
+//		else
+//		{
+//			break;
+//		}
+//	}
+//}
+
+//down”≈ªØ
+void Down(HPDataType* a, size_t parent, size_t size)
 {
-	size_t lchild = parent*2 + 1;
-	size_t rchild = parent*2 + 2;
-	while (rchild<size)
+	size_t child = parent * 2 + 1;
+	while (child < size)
 	{
-		if (a[lchild]<a[rchild])
+		if (child + 1 <size && a[child+1] < a[child])
 		{
-			if (a[parent] > a[lchild])
-			{
-				swap(&a[parent], &a[lchild]);
-				parent = lchild;
-				lchild = parent*2 + 1;
-				rchild = parent*2 + 2;
-			}
+			child++;
 		}
-		else if (a[lchild]>a[rchild])
+		if (a[child] < a[parent])
 		{
-			if (a[parent] > a[rchild])
-			{
-				swap(&a[parent], &a[rchild]);
-				parent = rchild;
-				lchild = parent*2 + 1;
-				rchild = parent*2+ 2;
-			}
+			swap(&a[child],&a[parent]);
+			parent = child;
+			child = parent * 2 + 1;
 		}
 		else
 		{

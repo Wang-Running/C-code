@@ -24,6 +24,7 @@ void HeapSort(int* a,int size)
 	{
 		HeapPush(&hp,a[i]);
 	}
+	HeapPrint(&hp);
 	int j = 0;
 	while (!HeapEmpty(&hp))
 	{
@@ -32,6 +33,21 @@ void HeapSort(int* a,int size)
 		HeapPop(&hp);
 	}
 	HeapDestroy(&hp);
+}
+
+//优化
+void HeapSort(int* a,int size)
+{
+	//向上调整建堆
+	for (int i = 0;i<size;i++)
+	{
+		up(a,i);
+	}
+	//向下调整建堆
+	for (int i = (size-1-1)/2; i>=0; i--)
+	{
+		down(a,i, size);
+	}
 }
 
 int main()
@@ -45,3 +61,4 @@ int main()
 	}
 	return 0;
 }
+
