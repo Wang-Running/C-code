@@ -16,37 +16,52 @@ void TestHeap()
 }
 
 //堆排序
-void HeapSort(int* a,int size)
-{
-	HP hp;
-	HeapInit(&hp);
-	for (int i = 0;i<size;i++)
-	{
-		HeapPush(&hp,a[i]);
-	}
-	HeapPrint(&hp);
-	int j = 0;
-	while (!HeapEmpty(&hp))
-	{
-		a[j] = HeapTop(&hp);
-		j++;
-		HeapPop(&hp);
-	}
-	HeapDestroy(&hp);
-}
+//void HeapSort(int* a,int size)
+//{
+//	HP hp;
+//	HeapInit(&hp);
+//	for (int i = 0;i<size;i++)
+//	{
+//		HeapPush(&hp,a[i]);
+//	}
+//	HeapPrint(&hp);
+//	int j = 0;
+//	while (!HeapEmpty(&hp))
+//	{
+//		a[j] = HeapTop(&hp);
+//		j++;
+//		HeapPop(&hp);
+//	}
+//	HeapDestroy(&hp);
+//}
 
-//优化
+//堆排序优化->直接对数组建堆
+//时间复杂度O(N*logN)空间复杂度O(1)
 void HeapSort(int* a,int size)
 {
 	//向上调整建堆
-	for (int i = 0;i<size;i++)
-	{
-		up(a,i);
-	}
+	//分析后是件复杂度为O(N*logN)
+	//for (int i = 1;i<size;i++)
+	//{
+	//	up(a,i);
+	//}
 	//向下调整建堆
+	//分析后是件复杂度为O(N+logN)=O(N)
+
+	//总结，一般取向下调整建堆效率更高
+	//升序建大堆
+	//降序建小堆
 	for (int i = (size-1-1)/2; i>=0; i--)
 	{
-		down(a,i, size);
+		Down(a,i, size);
+	}
+	//最后一个数据的下标
+	size_t end = size - 1;
+	while (end>0)
+	{
+		swap(&a[0],&a[end]);
+		Down(a,0,end);
+		end--;
 	}
 }
 
