@@ -15,7 +15,7 @@ void TestHeap()
 	HeapPrint(&hp);
 }
 
-//∂—≈≈–Ú
+//1.¥¥Ω®∂—£¨∂—≈≈–Ú
 //void HeapSort(int* a,int size)
 //{
 //	HP hp;
@@ -76,4 +76,3 @@ int main()
 	}
 	return 0;
 }
-
