@@ -11,11 +11,13 @@ BTNode* CreatBinaryTree()
 	BTNode* node4 = BuyNode(4);
 	BTNode* node5 = BuyNode(5);
 	BTNode* node6 = BuyNode(6);
+	//BTNode* node7 = BuyNode(7);
 	node1->left = node2;
 	node1->right = node4;
 	node2->left = node3;
 	node4->left = node5;
 	node4->right = node6;
+	//node3->left = node7;
 	return node1;
 }
 
@@ -92,6 +94,22 @@ int BTreeDepth(BTNode* root)
 	return leftdepth >rightdepth ? leftdepth + 1 : rightdepth + 1;
 }
 
+// 二叉树查找值为x的节点
+BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
+{
+	if (root==NULL)
+	{
+		return NULL;
+	}
+	if (root->data == x)
+		return root;
+	if (BinaryTreeFind(root->left, x))
+		return BinaryTreeFind(root->left,x);
+	if (BinaryTreeFind(root->right, x))
+		return BinaryTreeFind(root->right, x);
+	return NULL;
+}
+
 int main()
 {
 	BTNode* tree = CreatBinaryTree();
@@ -101,13 +119,16 @@ int main()
 	//printf("\n");
 	//PostOrder(tree);
 	//printf("\n");
-	int count = 0;
+	/*int count = 0;*/
 	//printf("%d\n", BTreeSize(tree));
 	//printf("%d\n", BTreeSize(tree));
 	//BTreeSize(tree, &count);
 	//printf("%d\n", count);
-	printf("%d\n", BTreeSize(tree));
-	printf("%d\n", BTreeLeafSize(tree));
-	printf("%d\n", BTreeDepth(tree));
+	//printf("%d\n", BTreeSize(tree));
+	//printf("%d\n", BTreeLeafSize(tree));
+	//printf("%d\n", BTreeDepth(tree));
+	//LevelOrder(tree);
+	printf("%p ",BinaryTreeFind(tree,4));
+	printf("%d ", *BinaryTreeFind(tree, 4));
 	return 0;
 }
