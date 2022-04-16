@@ -141,3 +141,37 @@
 //	_postorderTraversal(root, a, &i);
 //	return a;
 //}
+
+
+//力扣 572另一颗子树
+//bool isSameTree(struct TreeNode* p, struct TreeNode* q){
+//	//都为空，相等
+//	if (p == NULL&&q == NULL)
+//	{
+//		return true;
+//	}
+//	//一个为空，一个不为空，不相等
+//	if (p == NULL || q == NULL)
+//	{
+//		return false;
+//	}
+//	//都不为空
+//	if (p->val != q->val)
+//	{
+//		return false;
+//	}
+//	return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+//}
+//
+//bool isSubtree(struct TreeNode* root, struct TreeNode* subRoot){
+//	//判断为空
+//	if (root == NULL)
+//	{
+//		return false;
+//	}
+//	//相等在比较左子树是否与他相同
+//	//不同再比较右子树
+//	return isSameTree(root, subRoot) ||
+//		isSubtree(root->left, subRoot) ||
+//		isSubtree(root->right, subRoot);
+//}
