@@ -66,13 +66,22 @@ void BubbleSort(int* a, int n)
 	//大循环
 	for (int i = 0;i<n-1;i++)
 	{
+		//优化，若无交换，有序，直接结束比较
+		int flag = 0;
 		//单趟循环
 		for (int j = 0;j<n-i-1;j++)
 		{
-			if (a[j]<a[j+1])
+			if (a[j]>a[j+1])
 			{
+				flag = 1;
 				Swap(&a[j],&a[j+1]);
 			}
 		}
+		if (flag==0)
+		{
+			break;
+		}
 	}
 }
+//时间复杂度O(N^2)
+//最好O(N)
