@@ -175,3 +175,54 @@
 //		isSubtree(root->left, subRoot) ||
 //		isSubtree(root->right, subRoot);
 //}
+
+//二叉树构建
+//KY11 二叉树遍历
+//#include <stdio.h>
+//typedef struct BinaryTreeNode
+//{
+//	char data;
+//	struct BinaryTreeNode*left;
+//	struct BinaryTreeNode*right;
+//}BTNode;
+//
+//
+//BTNode* CreatBTree(char* a, int* i)
+//{
+//	if (a[*i] == '#')
+//	{
+//		(*i)++;
+//		return NULL;
+//	}
+//
+//	BTNode* node = (BTNode*)malloc(sizeof(BTNode));
+//	if (node == NULL)
+//	{
+//		exit(-1);
+//	}
+//	node->data = a[(*i)++];
+//	node->left = CreatBTree(a, i);
+//	node->right = CreatBTree(a, i);
+//	return node;
+//}
+//
+//void InOrder(BTNode* tree)
+//{
+//	if (tree == NULL)
+//	{
+//		return;
+//	}
+//	InOrder(tree->left);
+//	printf("%c ", tree->data);
+//	InOrder(tree->right);
+//}
+//
+//int main()
+//{
+//	char a[100];
+//	scanf("%s", a);
+//	int i = 0;
+//	BTNode* root = CreatBTree(&a, &i);
+//	InOrder(root);
+//	return 0;
+//}
