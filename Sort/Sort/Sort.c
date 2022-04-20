@@ -85,3 +85,71 @@ void BubbleSort(int* a, int n)
 }
 //时间复杂度O(N^2)
 //最好O(N)
+
+//希尔排序-优化的插入排序
+//1.预排序  接近有序
+//2.直接插入排序
+
+//三层循环,预排序
+//void ShellSort(int* a, int n)
+//{
+//	int gap = 3;
+//	//控制gap组
+//	for (int j = 0;j<gap;j++)
+//	{
+//		//控制间隔为gap的一组数据
+//		for (int i = j; i<n - gap; i += gap)
+//		{
+//			int end = i;
+//			int num = a[end + gap];
+//			while (end >= 0)
+//			{
+//				if (num<a[end])
+//				{
+//					a[end + gap] = a[end];
+//					end -= gap;
+//				}
+//				else
+//				{
+//					break;
+//				}
+//			}
+//			a[end + gap] = num;
+//		}
+//	}
+//
+//}
+
+//两层循环，预排序
+void ShellSort(int* a, int n)
+{
+	//gap不是固定的值
+	//int gap = 3;
+	int gap = n;
+	//一层循环控制gap,大于1预排序
+	//gap等于1时直接插入排序
+	while (gap>1)
+	{
+		gap = gap / 3 + 1;
+		for (int i = 0; i<n - gap; i++)
+		{
+			int end = i;
+			int num = a[end + gap];
+			while (end >= 0)
+			{
+				if (num<a[end])
+				{
+					a[end + gap] = a[end];
+					end -= gap;
+				}
+				else
+				{
+					break;
+				}
+			}
+			a[end + gap] = num;
+		}
+	}
+	//不用调用插入排序
+	//InsertSort(a, n);
+}
