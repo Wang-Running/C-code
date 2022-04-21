@@ -47,17 +47,67 @@ void InsertSort(int* a, int n)
 }
 //时间复杂度最坏O(N^2)，最好O(N)
 
-// 堆排序
-void AdjustDwon(int* a, int n, int root);
-void HeapSort(int* a, int n);
 
-
-void Swap(int* pa,int* pb)
+void Swap(int* pa, int* pb)
 {
 	int num = *pa;
 	*pa = *pb;
 	*pb = num;
 }
+
+// 堆排序
+void AdjustDown(int* a, int root, int n)
+{
+	int child = root * 2 + 1;
+	while (child < n)
+	{
+		if (child + 1 <n && a[child + 1] < a[child])
+		{
+			child++;
+		}
+		if (a[child] < a[root])
+		{
+			Swap(&a[child], &a[root]);
+			root = child;
+			child = root * 2 + 1;
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+//堆排序优化->直接对数组建堆
+//时间复杂度O(N*logN)空间复杂度O(1)
+void HeapSort(int* a, int n)
+{
+	//向上调整建堆
+	//分析后是件复杂度为O(N*logN)
+	//for (int i = 1;i<size;i++)
+	//{
+	//	up(a,i);
+	//}
+	//向下调整建堆
+	//分析后是件复杂度为O(N+logN)=O(N)
+
+	//总结，一般取向下调整建堆效率更高
+	//升序建大堆
+	//降序建小堆
+	for (int i = (n - 1 - 1) / 2; i >= 0; i--)
+	{
+		AdjustDown(a, i, n);
+	}
+	//最后一个数据的下标
+	size_t end = n - 1;
+	while (end>0)
+	{
+		Swap(&a[0], &a[end]);
+		AdjustDown(a, 0, end);
+		end--;
+	}
+}
+
+
 
 // 冒泡排序
 //升序为例
@@ -152,4 +202,86 @@ void ShellSort(int* a, int n)
 	}
 	//不用调用插入排序
 	//InsertSort(a, n);
+}
+
+
+//直接选择排序
+//每个数放到固定的对应位置
+void SelectSort(int* a, int n)
+{
+	int left = 0, right = n - 1;
+	while (left<right)
+	{
+		int mini = left;
+		int maxi = left;
+		//遍历一次选出最大数和最小数下标
+		for (int i = left;i<=right;i++)
+		{
+			if (a[i]<a[mini])
+			{
+				mini = i;
+			}
+			if (a[i]>a[maxi])
+			{
+				maxi = i;
+			}
+		}
+		//将最大值和最小值放在最左边和最右边
+		//要注意当left=maxi时，值会被掉包
+
+		Swap(&a[left],&a[mini]);
+
+		//防掉包，如果left和maxi重叠，修正maxi
+		if (left==maxi)
+		{
+			maxi = mini;
+		}
+
+		Swap(&a[right], &a[maxi]);
+		//更新下标
+		left++;
+		right--;
+	}
+}
+
+//hoare快速排序-单趟
+int PartSort(int* a,int left,int right)
+{
+	int keyi = left;
+	while (left<right)
+	{
+		//=是防止死循环
+		//left<right是防止越界
+
+		//右边走找小
+		while (left<right&&a[right]>=a[keyi])
+		{
+			right--;
+		}
+		//左边走找大
+		while (left<right&&a[left] <= a[keyi])
+		{
+			left++;
+		}
+		//交换左右
+		Swap(&a[left],&a[right]);
+	}
+
+	//相等结束，交换相遇位置和keyi上的值
+	Swap(&a[keyi],&a[right]);
+	return left;
+}
+
+//快速排序-整体排序
+void QuickSort(int* a,int begin,int end)
+{
+	if (begin>=end)
+	{
+		return;
+	}
+	//第一趟找出中间
+	int keyi = PartSort(a,begin,end);
+	//对两边区间进行排序
+	QuickSort(a,begin,keyi-1);
+	QuickSort(a,keyi+1,end);
 }
