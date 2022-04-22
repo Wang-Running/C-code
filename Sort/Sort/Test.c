@@ -46,7 +46,7 @@ void TsetHeapSort()
 void TestQuickSort()
 {
 	int a[] = { 9, 8, 5, 6, 4, 7, 1, 3 };
-	QuickSort1(a,0, sizeof(a) / sizeof(a[0])-1);
+	QuickSort2(a,0, sizeof(a) / sizeof(a[0])-1);
 	PrintArr(a, sizeof(a) / sizeof(a[0]));
 }
 

@@ -340,8 +340,8 @@ void QuickSort1(int* a,int begin,int end)
 	//前后指针法
 	/*int keyi = PartSort3(a, begin, end);*/
 	//对两边区间进行排序
-	QuickSort(a,begin,keyi-1);
-	QuickSort(a,keyi+1,end);
+	QuickSort1(a,begin,keyi-1);
+	QuickSort1(a,keyi+1,end);
 }
 
 //挖坑法快速排序-单趟
@@ -449,7 +449,7 @@ void QuickSort2(int* a, int begin, int end)
 		//前后指针法
 		/*int keyi = PartSort3(a, begin, end);*/
 		//对两边区间进行排序
-		QuickSort(a, begin, keyi - 1);
-		QuickSort(a, keyi + 1, end);
+		QuickSort2(a, begin, keyi - 1);
+		QuickSort2(a, keyi + 1, end);
 	}
 }

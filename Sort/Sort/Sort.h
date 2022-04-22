@@ -21,4 +21,7 @@ void BubbleSort(int* a, int n);
 void SelectSort(int* a, int n);
 
 //快速排序
-void QuickSort(int* a, int begin, int end);
+void QuickSort1(int* a, int begin, int end);
+
+//快速排序
+void QuickSort2(int* a, int begin, int end);
