@@ -244,9 +244,63 @@ void SelectSort(int* a, int n)
 	}
 }
 
-//hoare快速排序-单趟
-int PartSort(int* a,int left,int right)
+
+
+
+//注意:若对有序数据进行快排，选择key为
+//最大或最小，那么时间复杂度为O(N^2)
+//栈帧会溢出
+//对此进行优化
+//1.随机选key
+//2.三数取中(选不是最大也不是最小)
+int GetMid(int* a, int left, int right)
 {
+	//可能会出界
+	/*int mid = (left+right) / 2;*/
+	int mid = left + (right - left) / 2;
+	if (a[left]<a[mid])
+	{
+		if (a[mid] < a[right])
+		{
+			return mid;
+		}
+		else if (a[left]>a[right])
+		{
+			return left;
+		}
+		else
+		{
+			return right;
+		}
+	}
+	else
+	{
+		if (a[mid]>a[right])
+		{
+			return mid;
+		}
+		else if (a[left]>a[right])
+		{
+			return right;
+		}
+		else
+		{
+			return left;
+		}
+	}
+}
+
+
+
+
+//hoare快速排序-单趟
+int PartSort1(int* a,int left,int right)
+{
+	//选出中数交换位置
+	int mid = GetMid(a,left,right);
+	Swap(&a[mid],&a[left]);
+
+	//key在左边的数变为选的中数
 	int keyi = left;
 	while (left<right)
 	{
@@ -273,15 +327,129 @@ int PartSort(int* a,int left,int right)
 }
 
 //快速排序-整体排序
-void QuickSort(int* a,int begin,int end)
+void QuickSort1(int* a,int begin,int end)
 {
 	if (begin>=end)
 	{
 		return;
 	}
-	//第一趟找出中间
-	int keyi = PartSort(a,begin,end);
+	//hoare第一趟找出中间
+	int keyi = PartSort1(a,begin,end);
+	//挖坑法找
+	/*int keyi = PartSort2(a, begin, end);*/
+	//前后指针法
+	/*int keyi = PartSort3(a, begin, end);*/
 	//对两边区间进行排序
 	QuickSort(a,begin,keyi-1);
 	QuickSort(a,keyi+1,end);
+}
+
+//挖坑法快速排序-单趟
+//左边或右边是一个坑，右边找小填左边，左边找大填右边
+int PartSort2(int* a, int left, int right)
+{
+	int key = a[left];
+	int pit = left;
+	while (left<right)
+	{
+		//右边先走，找小
+		while (left<right&&a[right]>=key)
+		{
+			right--;
+		}
+		//补上坑
+		a[pit] = a[right];
+		//更新坑
+		pit = right;
+		//左边后走，找大
+		while (left<right&&a[left] <= key)
+		{
+			left++;
+		}
+		a[pit] = a[left];
+		pit = left;
+	}
+	a[pit] = key;
+	return pit;
+}
+
+
+//前后指针法快指针找小
+//key在左
+//int PartSort3(int* a, int left, int right)
+//{
+//	int key = a[left];
+//	int prev = left;
+//	int cur = left + 1;
+//	/*while (cur<=right)
+//	{
+//		if (a[cur]<key)
+//		{
+//			prev++;
+//			Swap(&a[prev],&a[cur]);
+//		}
+//		cur++;*/
+//	while (cur <= right)
+//	{
+//		if (a[cur]<=key && a[++prev]!=a[cur])
+//		{
+//			Swap(&a[prev], &a[cur]);
+//		}
+//		cur++;
+//	}
+//	Swap(&a[prev],&a[left]);
+//
+//	return prev;
+//}
+
+//前后指针法快指针找小
+//key在右
+int PartSort3(int* a, int left, int right)
+{
+	int key = a[right];
+	int prev = left-1;
+	int cur = left;
+	while (cur < right)
+	{
+		if (a[cur]<=key && a[++prev] != a[cur])
+		{
+			Swap(&a[prev], &a[cur]);
+		}
+		cur++;
+	}
+
+	Swap(&a[++prev], &a[right]);
+
+	return prev;
+}
+
+
+//小区间优化
+//区间很小时，不再使用递归思路排序
+//直接使用插入排序对小区间排序，
+//减少递归调用
+
+void QuickSort2(int* a, int begin, int end)
+{
+	if (begin >= end)
+	{
+		return;
+	}
+
+	if (end - begin<10)
+	{
+		InsertSort(a+begin,end-begin+1);
+	}
+	else
+	{
+		//hoare第一趟找出中间
+		int keyi = PartSort1(a, begin, end);
+		//挖坑法找
+		/*int keyi = PartSort2(a, begin, end);*/
+		//前后指针法
+		/*int keyi = PartSort3(a, begin, end);*/
+		//对两边区间进行排序
+		QuickSort(a, begin, keyi - 1);
+		QuickSort(a, keyi + 1, end);
+	}
 }
