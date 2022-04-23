@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Sort.h"
+#include "Stack.h"
 
 void PrintArr(int* a,int n)
 {
@@ -452,4 +453,185 @@ void QuickSort2(int* a, int begin, int end)
 		QuickSort2(a, begin, keyi - 1);
 		QuickSort2(a, keyi + 1, end);
 	}
+}
+
+//快速排序---非递归
+//用栈实现
+void QuickSort3(int* a, int begin, int end)
+{
+	ST st;
+	StackInit(&st);
+	//将他们的下标入栈
+	StackPush(&st,begin);
+	StackPush(&st,end);
+
+	while (!StackEmpty(&st))
+	{
+		//后进先出
+		int right = StackTop(&st);
+		StackPop(&st);
+		int left = StackTop(&st);
+		StackPop(&st);
+
+		//选一种快排方法
+		int keyi = PartSort3(a, left, right);
+
+		//对两边区间进行入栈[left,keyi-1][keyi+1,right]
+		if (left<keyi-1)
+		{
+			StackPush(&st,left);
+			StackPush(&st,keyi-1);
+		}
+		if (keyi+1<right)
+		{
+			StackPush(&st, keyi+1);
+			StackPush(&st, right);
+		}
+
+	}
+
+}
+
+
+void _MergeSort(int* a, int begin, int end, int* tmp)
+{
+	if (begin>=end)
+	{
+		return;
+	}
+	int mid=(begin+end)/2;
+	//区间分割
+	//不能是[begin,mid-1]和[mid,end],会存在死循环
+	_MergeSort(a, begin, mid,tmp);
+	_MergeSort(a, mid+1, end, tmp);
+
+	//区间归并
+	//printf("[%d %d] [%d %d]\n",begin,mid,mid+1,end);
+	int begin1 = begin, end1 = mid;
+	int begin2 = mid+1, end2 = end;
+	//确定归并时存放数据的起始位置
+	int index = begin;
+	//写的是继续的条件
+	//一次比较区间中数据的大小，一个区间写完后
+	//需要将没结束的区间中的剩余数据写入数组中
+	while (begin1<=end1 && begin2<=end2)
+	{
+		if (a[begin1]<a[begin2])
+		{
+			tmp[index++] = a[begin1++];
+		}
+		else
+		{
+			tmp[index++] = a[begin2++];
+		}
+	}
+	//没结束的区间直接归并到临时数组中
+	while (begin1<=end1)
+	{
+		tmp[index++] = a[begin1++];
+	}
+
+	while (begin2 <= end2)
+	{
+		tmp[index++] = a[begin2++];
+	}
+
+	//将排好序的数据拷贝回原空间
+	memcpy(a+begin,tmp+begin,(end-begin+1)*sizeof(int));
+}
+
+//归并排序
+void MergeSort(int* a, int n)
+{
+	//要用到临时数组
+	int* tmp = (int*)malloc(sizeof(int)*n);
+	assert(tmp);
+	//调用子函数进行区间的分割
+	_MergeSort(a, 0, n - 1, tmp);
+	free(tmp);
+}
+
+
+
+
+//归并排序非递归
+//直接控制间隔进行排序归并
+//间隔注意不能按2的倍数算，若数组个数为奇数，存在越界问题
+void MergeSortNonR(int* a, int n)
+{
+	int* tmp = (int*)malloc(sizeof(int)*n);
+	int gap = 1;
+
+	//通过调整间距gap，进行归并排序
+	//分组归并，间距为gap的是一组
+	while (gap<n)
+	{
+		//控制区间边界，对初始间隔进行排序
+		for (int i = 0; i<n; i += 2 * gap)
+		{
+			int begin1 = i, end1 = i + gap - 1;
+			int begin2 = i + gap, end2 = i + 2 * gap - 1;
+			//越界，须纠正下标
+
+			//end1越界，修正
+			if (end1 >= n)
+				end1 = n - 1;
+
+			//begin2越界，右边区间不存在
+			//修改成不存在的区间
+			if (begin2 >= n)
+			{
+				begin2 = 0;
+				end2 = -1;
+			}
+
+			//end2越界,修正
+			if (begin2<n && end2 >= n)
+				end2 = n - 1;
+
+			//****条件断点*****
+			if (begin1==8&&end1==9
+				&&begin2==9&&end2==9)
+			{
+				int x = 0;
+			}
+
+			//直接进行归并
+			int index = i;
+			//写的是继续的条件
+			//一次比较区间中数据的大小，一个区间写完后
+			//需要将没结束的区间中的剩余数据写入数组中
+			while (begin1 <= end1 && begin2 <= end2)
+			{
+				if (a[begin1]<a[begin2])
+				{
+					tmp[index++] = a[begin1++];
+				}
+				else
+				{
+					tmp[index++] = a[begin2++];
+				}
+			}
+			//没结束的区间直接归并到临时数组中
+			while (begin1 <= end1)
+			{
+				tmp[index++] = a[begin1++];
+			}
+
+			while (begin2 <= end2)
+			{
+				tmp[index++] = a[begin2++];
+			}
+
+		}
+
+		//将排好序的数据拷贝回原空间
+		memcpy(a, tmp, n*sizeof(int));
+
+		//更新间距gap
+		gap *= 2;
+	}
+
+		
+	free(tmp);
 }

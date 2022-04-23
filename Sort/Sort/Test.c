@@ -46,7 +46,23 @@ void TsetHeapSort()
 void TestQuickSort()
 {
 	int a[] = { 9, 8, 5, 6, 4, 7, 1, 3 };
-	QuickSort2(a,0, sizeof(a) / sizeof(a[0])-1);
+	QuickSort3(a,0, sizeof(a) / sizeof(a[0])-1);
+	PrintArr(a, sizeof(a) / sizeof(a[0]));
+}
+
+//πÈ≤¢≈≈–Ú
+void TestMergeSort()
+{
+	int a[] = { 9, 8, 5, 6, 4, 7, 1, 3 };
+	MergeSort(a, sizeof(a) / sizeof(a[0]));
+	PrintArr(a, sizeof(a) / sizeof(a[0]));
+}
+
+//πÈ≤¢≈≈–Ú--∑«µ›πÈ
+void TestMergeSortNonR()
+{
+	int a[] = { 9, 8, 5, 6, 4, 7, 1, 3 };
+	MergeSortNonR(a, sizeof(a) / sizeof(a[0]));
 	PrintArr(a, sizeof(a) / sizeof(a[0]));
 }
 
@@ -58,5 +74,7 @@ int main()
 	//TestSelectSort();
 	//TsetHeapSort();
 	TestQuickSort();
+	TestMergeSort();
+	TestMergeSortNonR();
 	return 0;
 }
