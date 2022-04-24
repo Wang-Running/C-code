@@ -61,20 +61,29 @@ void TestMergeSort()
 //πÈ≤¢≈≈–Ú--∑«µ›πÈ
 void TestMergeSortNonR()
 {
-	int a[] = { 9, 8, 5, 6, 4, 7, 1, 3 };
+	int a[] = { 9, 8, 5, 6, 4, 7, 1, 3 ,2,14};
 	MergeSortNonR(a, sizeof(a) / sizeof(a[0]));
+	PrintArr(a, sizeof(a) / sizeof(a[0]));
+}
+
+//º∆ ˝≈≈–Ú
+void TestCountSort()
+{
+	int a[] = { 9, 8, 5, 6, 4, 7, 1, 3, 2, 14 };
+	CountSort(a, sizeof(a) / sizeof(a[0]));
 	PrintArr(a, sizeof(a) / sizeof(a[0]));
 }
 
 int main()
 {
-	//TestInsertSort();
-	//TestBubbleSort();
-	//TestShellSort();
-	//TestSelectSort();
-	//TsetHeapSort();
+	TestInsertSort();
+	TestBubbleSort();
+	TestShellSort();
+	TestSelectSort();
+	TsetHeapSort();
 	TestQuickSort();
 	TestMergeSort();
 	TestMergeSortNonR();
+	TestCountSort();
 	return 0;
 }

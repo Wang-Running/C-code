@@ -590,11 +590,11 @@ void MergeSortNonR(int* a, int n)
 				end2 = n - 1;
 
 			//****条件断点*****
-			if (begin1==8&&end1==9
+			/*if (begin1==8&&end1==9
 				&&begin2==9&&end2==9)
 			{
 				int x = 0;
-			}
+			}*/
 
 			//直接进行归并
 			int index = i;
@@ -634,4 +634,52 @@ void MergeSortNonR(int* a, int n)
 
 		
 	free(tmp);
+}
+
+//计数排序-相对映射
+//适用于比较集中的数据
+//时间复杂度O(rang+N)
+//空间复杂度O(rang)
+void CountSort(int* a, int n)
+{
+	int min=a[0], max=a[0];
+	for (int i = 1;i<n;i++)
+	{
+		if (a[i]<min)
+		{
+			min = a[i];
+		}
+		if (a[i]>max)
+		{
+			max = a[i];
+		}
+	}
+	//相对个数--需要的空间大小
+	int rang = max - min + 1;
+	int* count =(int*)malloc(sizeof(int)*rang);
+	assert(count);
+
+	//初始化为0
+	memset(count,0,sizeof(int)*rang);
+
+	//计数
+	for (int i = 0;i<n;i++)
+	{
+		//a[i]-min是相对位置，++是计数，
+		//位置上都是0，出现一次++一次
+		count[a[i] - min]++;
+	}
+
+	//排序 -- 对计数的数组进行排序
+	int j = 0;
+	for (int i = 0;i<rang;i++)
+	{
+		//看count中位置上的次数，出现几次写几次
+		while (count[i]--)
+		{
+			//j记录原数组的位置
+			//i+min=原数值
+			a[j++] = i + min;
+		}
+	}
 }

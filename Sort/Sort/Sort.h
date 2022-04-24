@@ -35,3 +35,7 @@ void MergeSort(int* a, int n);
 
 //归并排序非递归
 void MergeSortNonR(int* a,int n);
+
+//计数排序-相对映射
+//适用于比较集中的数据
+void CountSort(int* a, int n);
