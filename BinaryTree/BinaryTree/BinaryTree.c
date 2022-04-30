@@ -72,6 +72,7 @@ void LevelOrder(BTNode* root)
 	QueueDestory(&q);
 }
 
+
 //¶þ²æÊ÷Ïú»Ù
 void BinaryTreeDestory(BTNode* root)
 {

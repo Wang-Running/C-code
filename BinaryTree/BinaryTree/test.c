@@ -27,11 +27,12 @@ BTNode* CreatBinaryTree()
 	BTNode* node6 = BuyNode(6);
 	BTNode* node7 = BuyNode(7);
 	node1->left = node2;
-	node1->right = node4;
-	node2->left = node3;
-	node4->left = node5;
-	node4->right = node6;
-	node2->right = node7;
+	node1->right = node3;
+	node2->left = node4;
+	node2->right = node5;
+	node3->left = node6;
+	node3->right = node7;
+	
 	return node1;
 }
 
@@ -178,9 +179,9 @@ int main()
 	//printf("%d\n", BTreeLeafSize(tree));
 	//printf("%d\n", BTreeDepth(tree));
 	LevelOrder(tree);
-	printf("%p ",BinaryTreeFind(tree,4));
-	printf("%d ", *BinaryTreeFind(tree, 4));
-	printf("完全二叉树:%d\n", BinaryTreeComplete(tree));
+	//printf("%p ",BinaryTreeFind(tree,4));
+	//printf("%d ", *BinaryTreeFind(tree, 4));
+	//printf("完全二叉树:%d\n", BinaryTreeComplete(tree));
 	BinaryTreeDestory(tree);
 	tree = NULL;
 	return 0;
@@ -188,43 +189,43 @@ int main()
 
 
 //二叉树前序构建及中序遍历
-BTNode* CreatBTree(char* a, int* i)
-{
-	if (a[*i] == '#')
-	{
-		(*i)++;
-		return NULL;
-	}
-
-	BTNode* node = (BTNode*)malloc(sizeof(BTNode));
-	if (node == NULL)
-	{
-		exit(-1);
-	}
-	node->data = a[(*i)++];
-	node->left = CreatBTree(a, i);
-	node->right = CreatBTree(a, i);
-	return node;
-}
-
-//中序遍历
-void InOrder(BTNode* tree)
-{
-	if (tree == NULL)
-	{
-		return;
-	}
-	InOrder(tree->left);
-	printf("%c ", tree->data);
-	InOrder(tree->right);
-}
-
-int main()
-{
-	char a[100];
-	scanf("%s", a);
-	int i = 0;
-	BTNode* root = CreatBTree(&a, &i);
-	InOrder(root);
-	return 0;
-}
+//BTNode* CreatBTree(char* a, int* i)
+//{
+//	if (a[*i] == '#')
+//	{
+//		(*i)++;
+//		return NULL;
+//	}
+//
+//	BTNode* node = (BTNode*)malloc(sizeof(BTNode));
+//	if (node == NULL)
+//	{
+//		exit(-1);
+//	}
+//	node->data = a[(*i)++];
+//	node->left = CreatBTree(a, i);
+//	node->right = CreatBTree(a, i);
+//	return node;
+//}
+//
+////中序遍历
+//void InOrder(BTNode* tree)
+//{
+//	if (tree == NULL)
+//	{
+//		return;
+//	}
+//	InOrder(tree->left);
+//	printf("%c ", tree->data);
+//	InOrder(tree->right);
+//}
+//
+//int main()
+//{
+//	char a[100];
+//	scanf("%s", a);
+//	int i = 0;
+//	BTNode* root = CreatBTree(&a, &i);
+//	InOrder(root);
+//	return 0;
+//}
